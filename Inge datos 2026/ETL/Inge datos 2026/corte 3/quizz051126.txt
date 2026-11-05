@@ -1,0 +1,108 @@
+// 1. Ventas de pedidos entregados por método de pago
+db.pedidos.aggregate([
+  { $match: { estado: "entregado" } },
+  { $group: {
+      _id: "$metodo_pago",
+      ventas_totales: { $sum: "$total" },
+      num_pedidos: { $sum: 1 }
+  }},
+  { $sort: { ventas_totales: -1 } }
+])
+
+// 2. ¿Cuántos pedidos se cancelaron?
+db.pedidos.countDocuments({ estado: "cancelado" })
+
+// Variante con aggregate:
+db.pedidos.aggregate([
+  { $match: { estado: "cancelado" } },
+  { $count: "pedidos_cancelados" }
+])
+
+// 3. Menú disponible de cada restaurante como lista, con su precio máximo
+//    (primeros 3 por _id)
+db.productos.aggregate([
+  { $match: { disponible: true } },
+  { $group: {
+      _id: "$restaurante_id",
+      menu: { $push: "$nombre" },
+      precio_maximo: { $max: "$precio" }
+  }},
+  { $sort: { _id: 1 } },
+  { $limit: 3 }
+])
+
+// 4. Productos por tipo con precio promedio
+db.productos.aggregate([
+  { $group: {
+      _id: "$tipo",
+      cantidad_productos: { $sum: 1 },
+      precio_promedio: { $avg: "$precio" }
+  }},
+  { $sort: { precio_promedio: -1 } }
+])
+
+// 5. Los 3 clientes con mayor gasto en pedidos entregados
+db.pedidos.aggregate([
+  { $match: { estado: "entregado" } },
+  { $group: {
+      _id: "$cliente_id",
+      gasto_total: { $sum: "$total" }
+  }},
+  { $sort: { gasto_total: -1 } },
+  { $limit: 3 },
+  { $lookup: {
+      from: "clientes",
+      localField: "_id",
+      foreignField: "_id",
+      as: "cliente"
+  }},
+  { $unwind: "$cliente" },
+  { $project: {
+      _id: 0,
+      cliente_id: "$_id",
+      nombre: "$cliente.nombre",
+      gasto_total: 1
+  }}
+])
+
+// 6. Restaurantes con ventas entregadas superiores a 70.000 (equivalente a HAVING)
+db.pedidos.aggregate([
+  { $match: { estado: "entregado" } },
+  { $group: {
+      _id: "$restaurante_id",
+      ventas_entregadas: { $sum: "$total" }
+  }},
+  { $match: { ventas_entregadas: { $gt: 70000 } } },   // ← el HAVING
+  { $lookup: {
+      from: "restaurantes",
+      localField: "_id",
+      foreignField: "_id",
+      as: "restaurante"
+  }},
+  { $unwind: "$restaurante" },
+  { $project: {
+      _id: 0,
+      restaurante_id: "$_id",
+      nombre: "$restaurante.nombre",
+      ventas_entregadas: 1
+  }},
+  { $sort: { ventas_entregadas: -1 } }
+])
+
+// 7. Pedidos pendientes o en camino con el email del cliente para notificarlo
+db.pedidos.aggregate([
+  { $match: { estado: { $in: ["pendiente", "en_camino"] } } },
+  { $lookup: {
+      from: "clientes",
+      localField: "cliente_id",
+      foreignField: "_id",
+      as: "cliente"
+  }},
+  { $unwind: "$cliente" },
+  { $project: {
+      _id: 1,
+      estado: 1,
+      total: 1,
+      email_cliente: "$cliente.email"
+  }}
+])
