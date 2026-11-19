@@ -1,0 +1,58 @@
+restaurantes
+
+// 1. con $in + $gte: restaurantes de Bogotá o Medellín, bien calificados y con domicilio
+db.restaurantes.find({
+  ciudad: { $in: ["Bogotá", "Medellín"] },
+  calificacion: { $gte: 4.5 },
+  domicilio: true
+})
+
+// 2. con $regex: restaurantes cuyo nombre contiene "arepa" (sin distinguir mayúsculas)
+db.restaurantes.find({
+  nombre: { $regex: "arepa", $options: "i" }
+})
+
+
+clientes
+
+// 3. con $elemMatch: clientes con una dirección "Oficina" en el barrio Salitre
+db.clientes.find({
+  direcciones: { $elemMatch: { alias: "Oficina", barrio: "Salitre" } }
+})
+
+// 4. con $gte + $nin: registrados desde 2026 que no son de Medellín
+db.clientes.find({
+  fecha_registro: { $gte: new Date("2026-01-01") },
+  ciudad: { $nin: ["Medellín"] }
+})
+
+
+
+productos
+
+// 5. con $gte + $lte: platos disponibles entre $30.000 y $45.000
+db.productos.find({
+  tipo: "plato",
+  precio: { $gte: 30000, $lte: 45000 },
+  disponible: true
+})
+
+// 6. con $or: productos no disponibles o sin stock
+db.productos.find({
+  $or: [{ stock: 0 }, { disponible: false }]
+})
+
+
+
+pedidos
+
+// 7. con $in + $gt: pedidos aún en curso (pendiente o en camino) de más de $50.000
+db.pedidos.find({
+  estado: { $in: ["pendiente", "en_camino"] },
+  total: { $gt: 50000 }
+})
+
+// 8. con $elemMatch: pedidos con algún ítem de 2 o más unidades y precio unitario >= $30.000
+db.pedidos.find({
+  items: { $elemMatch: { cantidad: { $gte: 2 }, precio: { $gte: 30000 } } }
+})

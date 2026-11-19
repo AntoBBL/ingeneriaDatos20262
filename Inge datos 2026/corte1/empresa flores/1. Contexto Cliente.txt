@@ -1,0 +1,24 @@
+1. Contexto Cliente
+Liwi Flor Eterna es una empresa fundada en 2019 que cultiva, conserva y comercializa la flor de Inírida desde el Guainía hacia mercados nacionales e internacionales. Cuentan además con un local en Bogotá para vender sus flores y productos regionales amazónicos como vinos y jaleas.
+
+2. Contexto Necesidad
+Actualmente registran sus pedidos y cierres financieros de forma manual en tablas artesanales debido a la falta de formación técnica del equipo. Esta metodología genera una "tabla maestra" muy compleja que dificulta analizar las ventas y calcular la rentabilidad real.
+
+3. Pregunta Problema
+¿Cómo estructurar un sistema de información y visualización de datos que permita a los socios de Liwi Flor Eterna entender la rentabilidad de sus productos y de su tienda física en menos de 10 minutos?
+
+4. Planteamiento del Problema
+La gestión manual de pedidos y costos impide a Liwi Flor Eterna clasificar detalladamente sus egresos e ingresos por canal de venta (B2B/B2C). Esto frena la toma de decisiones estratégicas al no tener claridad sobre qué productos son rentables o cuáles están en observación.
+
+5. Lógica de Negocio
+Las ventas se confirman con un anticipo del 50% y los cierres financieros se ejecutan mensualmente los días 15 clasificando egresos en inventario, operación e inversión. El sistema requiere una actualización periódica (no diaria) alineada a esos cierres para alimentar un panel en Power BI.
+
+6. Tres Requerimientos Funcionales
+RF-01 (Pedidos): Permitir el registro de ventas (B2B/B2C), detalles del producto, envío y validación del 50% de anticipo.
+
+RF-02 (Cierre de Caja): Permitir la carga mensual de transacciones clasificando los egresos en inventario, operativos o de inversión.
+
+RF-03 (Dashboard): Generar un tablero dinámico en Power BI para evaluar la rentabilidad del local y clasificar el catálogo por nivel de rotación.
+
+7. Requisitos Generales del SistemaRequisitos Funcionales: El sistema debe capturar pedidos con anticipos del 50%, registrar cierres financieros mensuales clasificando gastos (inventario, operación, inversión) y generar un dashboard en Power BI para evaluar la rentabilidad del catálogo y del local en menos de 10 minutos.  Requisitos No Funcionales: La solución utilizará un esquema de actualización periódica (mensual/quincenal) alineado a los cierres operativos para mantener el sistema ligero, garantizando además la integración del análisis exploratorio (EDA) y del código fuente en repositorios GitHub centralizados.  
+

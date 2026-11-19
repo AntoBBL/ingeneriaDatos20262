@@ -1,0 +1,11 @@
+1. ¿Que ciudad estuvo mas lejos de su meta en 2025? ¿En que meses?
+
+En 2025, la ciudad que mas lejos estuvo de su meta, segun mi tablero, fue Baranquilla. Los meses en que mas se alejo fueron octubre, noviembre, marzo, porque en esos meses sus ventas quedaron mas abajo de la meta que en el resto del año.
+
+2. ¿Que restaurante le deja mas comision a SaborYa y por que no coincide necesariamente con el que mas vende?
+
+Segun mi tablero, el restaurante que mas comision le deja a SaborYa es Mar y Coco, con $178.827.390. El que mas vende es Brasa Caribe, con $1.030.232.000 en ventas, y su comision es de $164.837.120. Vi que no coinciden porque la comision depende del porcentaje que paga cada restaurante: Mar y Coco paga el 21 % y Brasa Caribe el 16 %. Por eso Mar y Coco, aunque vende menos, le deja mas comision a SaborYa.
+
+3. ¿En que restaurante o ciudad se concentran las facturas rechazadas? ¿Que le recomendarias al equipo de contabilidad?
+
+Al revisar la tabla de facturas rechazadas, vi que no se concentran en un solo restaurante: en las mas recientes aparecen Burger Norte, Taco Loco, Sushi Nikko, Mar y Coco, Verde Vivo, Arepas La 19 y Brasa Caribe. En total hay 844 facturas rechazadas y 1.496 pendientes. Le recomendaria al equipo de contabilidad revisar por que la DIAN rechaza esas facturas y corregir la causa mas frecuente. Tambien recomendaria darle seguimiento a las pendientes, para que no terminen rechazadas.
